@@ -6,18 +6,20 @@ function getRandomHexColor() {
 }
 
 btnStop.disabled = true;
-let timer = null;
+let timerId;
 
 btnStart.addEventListener('click', () => {
-  timer = setInterval(() => {
+  function startSwitcher() {
     document.body.style.backgroundColor = getRandomHexColor();
-  }, 1000);
-  btnStart.disabled = true;
-  btnStop.disabled = false;
+    btnStart.disabled = true;
+    btnStop.disabled = false;
+  }
+  startSwitcher();
+  timerId = setInterval(startSwitcher, 1000);
 });
 
 btnStop.addEventListener('click', () => {
-  clearInterval(timer);
+  clearInterval(timerId);
   btnStart.disabled = false;
   btnStop.disabled = true;
 });
